@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&family=Song+Myung&display=swap');
+
+        .body {
+            margin:0 10%;
+            display: inline-block;
+            color: white;
+        }
+
+        h2 {
+            font-family: 'Song Myung', serif;
+        }
+
+        .content {
+            background-color: rgb(72, 76, 90);
+            margin: 30px 10px;
+            padding: 30px;
+            width: 350px;
+            height: 450px;
+            border-radius: 20%;
+            float: left;
+        
+        }
+
+        .sub {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .page {
+            display: inline-block;
+            font-size: 20px;
+        }
+
+        img {
+            height: 250px;
+            width: 180px;
+            object-fit: fill;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Recording my book</h1>
+    {% if not blogs %}
+
+    <h1>No result</h1>
+
+    {% else %}
+
+    <div class="body">
+        {% for blog in blogs.all %}
+        <div class="content">
+            <h2>{{blog.title}}</h2>
+            <div class="sub">
+                {{blog.writer}}<br><br>
+                {% if blog.img_thumbnail %}
+                <img src="{{blog.img_thumbnail.url}}">
+                {% endif %}
+                <br><br>
+                <a id="more" href="{%url 'book_detail' blog.id %}"> 더보기 ..</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</body>
+{% endblock %}

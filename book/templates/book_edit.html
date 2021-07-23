@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <Style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&family=Song+Myung&display=swap');
+
+        form {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+    </Style>
+</head>
+<h1>Update!</h1>
+
+<form enctype="multipart/form-data" method="post">
+    {%csrf_token%}
+    <div class="form">
+        <center>
+            <h3 style="width: 600px;">{{edit_book.as_p}}</h3>
+        </center>
+    </div>
+    <div class="button">
+        <button id="submit_btn" type="submit">submit</button>
+    </div>
+</form>
+{% endblock %}

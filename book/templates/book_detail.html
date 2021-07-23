@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <Style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&family=Song+Myung&display=swap');
+
+        body {
+            color: rgb(34, 34, 34);
+            font-size: 20px;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+
+        hr {
+            color: black;
+            border: 30px;
+        }
+
+        #data {
+            font-weight: bolder;
+            font-family: 'Noto Sans KR', sans-serif;
+            border-radius: 30px;
+            padding: 30px 40px;
+            margin: 30px 30%;
+            background-color: rgb(72, 76, 90);
+            color: rgb(255, 255, 255);
+        }
+
+        #info,
+        #etc {
+            font-family: 'Noto Sans KR', sans-serif;
+            text-align: right;
+            margin-right: 30%;
+        }
+
+        a {
+            text-transform: uppercase;
+            color: black;
+        }
+    </Style>
+</head>
+
+<body>
+    <h1>{{data.title}}</h1>
+    <div class="body">
+        <div id="data">
+            {% if data.img %}
+            <img src="{{data.img.url}}" alt="image" width="180" height="250">
+            {% endif %}
+            <br><Br><br>
+            {{data.contents | linebreaks}}
+
+        </div>
+    </div>
+    <div id="info">
+        Writer : {{data.writer}}
+        <br>
+        Date : {{data.p_date}}
+    </div>
+    <br>
+    <div id="etc">
+        <a href="{% url 'book_edit' data.id %}">▶Edit</a><br>
+        <a href="{% url 'book_delete' data.id %}">▶Delete</a>
+    </div>
+</body>
+{% endblock %}
+
+</html>

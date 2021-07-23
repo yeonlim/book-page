@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&family=Song+Myung&display=swap');
+
+        .body {
+            margin:0 10%;
+            display: inline-block;
+            color: white;
+        }
+
+        h2 {
+            font-family: 'Song Myung', serif;
+        }
+
+        .content {
+            background-color: rgb(72, 76, 90);
+            margin: 30px 10px;
+            padding: 30px;
+            width: 350px;
+            height: 450px;
+            border-radius: 20%;
+            float: left;
+        
+        }
+
+        .sub {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .page {
+            display: inline-block;
+            font-size: 20px;
+        }
+
+        img {
+            height: 250px;
+            width: 180px;
+            object-fit: fill;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Recording my book</h1>
+    <div class="body">
+        {% for content in posts %}
+        <div class="content">
+            <h2>{{content.title}}</h2>
+            <div class="sub">
+                {{content.writer}}<br><br>
+                {% if content.img_thumbnail %}
+                <img src="{{content.img_thumbnail.url}}">
+                {% endif %}
+                <br><br>
+                <a id="more" href="{%url 'book_detail' content.id %}"> 더보기 ..</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
+    <div class="page">
+        {% if posts.has_previous %}
+        <a href="?page=1">1</a>
+        <a href="?page={{posts.previous_page_number}}">◀</a>
+        {% endif %}
+
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
+
+        {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">▶</a>
+        <a href="?page={{posts.paginator.num_pages}}">{{posts.paginator.num_pages}}</a>
+        {% endif %}
+    </div>
+
+</body>
+{% endblock %}
